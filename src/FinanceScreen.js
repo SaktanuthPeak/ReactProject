@@ -1,117 +1,120 @@
-import './App.css';
-import TransactionList from "./components/TransactionList"
-import { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
-import { Divider } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Spin, Typography, Divider } from 'antd';
 import AddItem from './components/Additem';
-import { Spin, Typography } from 'antd';
-import axios from 'axios'
+import TransactionList from './components/TransactionList';
+import Modal from './components/Edit';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
+const URL_TXACTIONS = '/api/txactions';
 
-
-const URL_TXACTIONS = '/api/txactions'
-
-function App() {
+function FinanceScreen() {
     const [summaryAmount, setSummaryAmount] = useState(0);
-    const [isLoading, setIsLoading] = useState(false)
-    const [transactionData, setTransactionData] = useState([])
+    const [isLoading, setIsLoading] = useState(false);
+    const [transactionData, setTransactionData] = useState([]);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [editingRecord, setEditingRecord] = useState(null);
+
+    const openModal = (record) => {
+        setEditingRecord(record);
+        setIsModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setIsModalVisible(false);
+        setEditingRecord(null);
+    };
 
     const fetchItems = async () => {
         try {
-            setIsLoading(true)
-            const response = await axios.get(URL_TXACTIONS)
-            setTransactionData(response.data.data.map(row => ({
+            setIsLoading(true);
+            const response = await axios.get(URL_TXACTIONS);
+            const data = response.data.data.map((row) => ({
                 id: row.id,
                 key: row.id,
-                ...row.attributes
-            })))
+                ...row.attributes,
+            }));
+            setTransactionData(data);
         } catch (err) {
-            console.log(err)
-        } finally { setIsLoading(false) }
-    }
+            console.log(err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleAddItem = async (item) => {
         try {
-            setIsLoading(true)
-            const params = { ...item, action_datetime: dayjs() }
-            const response = await axios.post(URL_TXACTIONS, { data: params })
-            const { id, attributes } = response.data.data
+            setIsLoading(true);
+            const params = { ...item, action_datetime: dayjs() };
+            const response = await axios.post(URL_TXACTIONS, { data: params });
+            const { id, attributes } = response.data.data;
             setTransactionData([
                 ...transactionData,
-                { id: id, key: id, ...attributes }
-            ])
+                { id: id, key: id, ...attributes },
+            ]);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
 
-    const handleNoteChanged = (id, note) => {
-        setTransactionData(
-            transactionData.map(transaction => {
-                transaction.note = transaction.id === id ? note : transaction.note;
-                return transaction
-            })
-        )
-    }
-
-    const handleRowDeleted = async (itemId) => {
+    const handleRowEdited = async (record) => {
         try {
-            setIsLoading(true)
-            await axios.delete(`${URL_TXACTIONS}/${itemId}`)
-            fetchItems()
+            setIsLoading(true);
+            const response = await axios.put(`${URL_TXACTIONS}/${record.id}`, {
+                data: record,
+            });
+            const updatedData = transactionData.map((transaction) =>
+                transaction.id === record.id
+                    ? { id: record.id, key: record.id, ...record }
+                    : transaction
+            );
+            setTransactionData(updatedData);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
-    const handleRowEdited = async (note) => {
-        try {
-            setIsLoading(true)
-            await axios.put(`${URL_TXACTIONS}/${note.id}`, { data: note })
-            const { id, record } = response.data.data
-            setTransactionData(transactionData.map(transaction =>
-                transaction.id === id ? { id: id, key: id, ...record } : transaction));
-        } catch (err) {
-            console.log(err)
-        } finally {
-            setIsLoading(false)
-        }
-    }
+    };
 
     useEffect(() => {
-        fetchItems()
-    }, [])
+        fetchItems();
+    }, []);
 
     useEffect(() => {
-        setSummaryAmount(transactionData.reduce(
-            (sum, transaction) => (
-                transaction.type === "income" ? sum + transaction.amount : sum - transaction.amount
-            ), 0)
-        )
-    }, [transactionData])
+        setSummaryAmount(
+            transactionData.reduce(
+                (sum, transaction) =>
+                    transaction.type === 'income' ? sum + transaction.amount : sum - transaction.amount,
+                0
+            )
+        );
+    }, [transactionData]);
 
     return (
         <div className="App">
             <header className="App-header">
                 <Spin spinning={isLoading}>
-                    <Typography.Title>
-                        จำนวนเงินปัจจุบัน {summaryAmount} บาท
-                    </Typography.Title>
+                    <Typography.Title>จำนวนเงินปัจจุบัน {summaryAmount} บาท</Typography.Title>
 
                     <AddItem onItemAdded={handleAddItem} />
                     <Divider>บันทึก รายรับ - รายจ่าย</Divider>
                     <TransactionList
                         data={transactionData}
-                        onNoteChanged={handleNoteChanged}
-                        onRowDeleted={handleRowDeleted} />
-                    onRowEdited={handleRowEdited}
+                        onRowEdited={openModal}
+                    />
+                    {isModalVisible && (
+                        <Modal
+                            defaultValue={editingRecord}
+                            closeModal={closeModal}
+                            onSubmit={handleRowEdited}
+                        />
+                    )}
                 </Spin>
             </header>
         </div>
     );
 }
 
-export default App;
+export default FinanceScreen;

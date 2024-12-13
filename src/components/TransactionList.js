@@ -18,7 +18,7 @@ export default function TransactionList(props) {
             key: 'type',
             render: (type) => (
                 <Tag color={type === "income" ? "green" : "red"}>
-                    {type.toUpperCase()}
+                    {type ? type.toUpperCase() : "null"}
                 </Tag>
             ),
         },
