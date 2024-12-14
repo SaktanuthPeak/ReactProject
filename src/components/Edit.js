@@ -10,8 +10,8 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
             form.setFieldsValue({
                 id: defaultValue.id,
                 note: defaultValue.note,
-                amount: defaultValue.amount,
-                type: defaultValue.type,
+                amount: defaultValue.amount
+
             });
         }
     }, [defaultValue, form]);
@@ -30,20 +30,20 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
 
     return (
         <Modal
-            title="แก้ไขข้อมูล"
-            visible={true}
+            title="Edit transaction"
+            open={true}
             onCancel={closeModal}
             footer={[
                 <Button key="cancel" onClick={closeModal}>
-                    ยกเลิก
+                    Cancel
                 </Button>,
                 <Button key="submit" type="primary" onClick={handleSubmit}>
-                    บันทึก
+                    Edit
                 </Button>,
             ]}
         >
             <Form form={form} layout="vertical">
-                <Form.Item name="id" label="ID" hidden>
+                <Form.Item name="id" label="ID" hidden >
                     <Input disabled />
                 </Form.Item>
 
@@ -51,9 +51,11 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
                     name="type"
                     label="ชนิด"
                     rules={[{ required: true, message: 'กรุณาเลือกชนิด!' }]}
+                    layout="horizontal"
                 >
                     <Select
-                        style={{ width: '100%' }}
+                        allowClear
+                        style={{ width: '100px' }}
                         options={[
                             { value: 'income', label: 'รายรับ' },
                             { value: 'expense', label: 'รายจ่าย' },
@@ -61,25 +63,19 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
                     />
                 </Form.Item>
 
-                <Form.Item
-                    name="note"
-                    label="หมายเหตุ"
-                    rules={[{ required: true, message: 'กรุณากรอกหมายเหตุ!' }]}
-                >
-                    <Input.TextArea rows={4} />
-                </Form.Item>
 
                 <Form.Item
                     name="amount"
                     label="จำนวนเงิน"
-                    rules={[{ required: true, message: 'กรุณากรอกจำนวนเงิน!' }]}
-                >
-                    <InputNumber
-                        style={{ width: '100%' }}
-                        min={0}
-                        step={1}
-                        formatter={value => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    />
+                    rules={[{ required: true, message: 'กรุณากรอกจำนวนเงิน!' }]}>
+                    <InputNumber placeholder="จํานวนเงิน" />
+                    <Form.Item
+                        name="note"
+                        label="หมายเหตุ"
+                        rules={[{ required: true, message: 'กรุณากรอกหมายเหตุ!' }]}
+                    >
+                        <Input.TextArea rows={1} />
+                    </Form.Item>
                 </Form.Item>
             </Form>
         </Modal>
