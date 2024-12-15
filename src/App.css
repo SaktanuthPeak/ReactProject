@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+.App-finance-header {
+  min-height:10vh;
+
+
+
+
+}
+
+
+
+.App-finance-body {
+  /* background-color: #282c34; */
+  min-height: 46rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  /* color: white; */
+}
+/* .App-finance-aricle {
+  flex:4;
+  padding:20px;
+}
+.App-finance-aside {
+  flex: 1; 
+  padding: 20px;
+  background-color: #e4e4e4;
+} */

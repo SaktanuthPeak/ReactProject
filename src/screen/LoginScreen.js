@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Button, Form, Input, Alert } from 'antd';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 const URL_AUTH = "/api/auth/local"
 
 export default function LoginScreen(props) {
-    const navigate = useNavigate;
     const [isLoading, setIsLoading] = useState(false)
     const [errMsg, setErrMsg] = useState(null)
     const handleLogin = async (formData) => {

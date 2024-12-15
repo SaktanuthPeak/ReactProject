@@ -2,7 +2,8 @@ import './App.css';
 import axios from 'axios'
 import { useState } from 'react';
 import LoginScreen from './screen/LoginScreen';
-import FinanceScreen from './screen/FinanceScreen';
+import Home from './screen/Home';
+import FinanceScreen from './screen/FinanceScreen'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337"
@@ -26,21 +27,34 @@ function App() {
                     path="/"
                     element={
                         isAuthenticated ? (
-                            <Navigate to="/finance" />
+                            <Navigate to="/Home" />
                         ) : (
                             <LoginScreen onLoginSuccess={handleLoginSuccess} />
                         )
                     }
                 />
                 <Route
-                    path="/finance"
+                    path="/Home"
+                    element={
+                        isAuthenticated ? (
+                            <Home />
+                        ) : (
+                            <Navigate to="/" />
+                        )
+                    }
+                />
+
+                <Route
+                    path="/Home/Finance"
                     element={
                         isAuthenticated ? (
                             <FinanceScreen />
                         ) : (
                             <Navigate to="/" />
                         )
-                    } />
+                    }
+                />
+                <></>
             </Routes>
         </Router>
 

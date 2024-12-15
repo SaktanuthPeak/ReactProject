@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Spin, Typography, Divider, } from 'antd';
+import { Spin, Typography, Divider, Button } from 'antd';
 import AddItem from '../components/Additem';
 import TransactionList from '../components/TransactionList';
 import Modal from '../components/Edit';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router-dom'
+import App from '../components/nav'
+import { useNavigate } from 'react-router-dom';
 
 const URL_TXACTIONS = '/api/txactions';
 
 function FinanceScreen() {
-    const navigate = useNavigate;
     const [summaryAmount, setSummaryAmount] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [transactionData, setTransactionData] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [editingRecord, setEditingRecord] = useState(null);
+    const navigate = useNavigate();
 
     const openModal = (record) => {
         setEditingRecord(record);
@@ -68,10 +69,10 @@ function FinanceScreen() {
         }
     };
 
-    const handleRowEdited = async (updatedRecord) => {
+    const handleRowEdited = async (item) => {
         try {
             setIsLoading(true);
-            const response = await axios.put(`${URL_TXACTIONS}/${updatedRecord.id}`, { data: updatedRecord });
+            const response = await axios.put(`${URL_TXACTIONS}/${item.id}`, { data: item });
             fetchItems();
             const { id, attributes } = response.data.data;
 
@@ -97,6 +98,10 @@ function FinanceScreen() {
             setIsLoading(false);
         }
     };
+    const handleEditClick = () => {
+        navigate("/Home");
+    }
+
 
     useEffect(() => {
         fetchItems();
@@ -114,7 +119,12 @@ function FinanceScreen() {
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header>
+                <App />
+            </header>
+            <body className='App-finance-body'>
+
+
                 <Spin spinning={isLoading}>
                     <Typography.Title>จำนวนเงินปัจจุบัน {summaryAmount} บาท</Typography.Title>
 
@@ -133,9 +143,10 @@ function FinanceScreen() {
                             onSubmit={handleRowEdited}
                         />
                     )}
+                    <Button onClick={handleEditClick}>Go to Home</Button>
                 </Spin>
-            </header>
-        </div>
+            </body>
+        </div >
     );
 }
 
