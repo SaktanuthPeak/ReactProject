@@ -2,20 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Spin, Typography, Divider, Button } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import App from '../components/nav';
+import Nav from '../components/nav';
 import Home from '../components/Home';
+import App from '../App';
 const URL_TXACTIONS = '/api/txactions';
+
 
 function HomeScreen() {
     const [summaryAmount, setSummaryAmount] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [transactionData, setTransactionData] = useState([]);
     const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const handleLogout = () => {
+        setIsAuthenticated(false)
+    }
 
 
-    const handleEditClick = () => {
-        navigate("/Home/Finance");
-    };
 
 
     useEffect(() => {
@@ -53,7 +56,7 @@ function HomeScreen() {
     return (
         <div className="App">
             <header>
-                <App />
+                <Nav />
             </header>
             <body className='App-finance-body'>
                 <Spin spinning={isLoading}>

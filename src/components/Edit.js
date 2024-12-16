@@ -69,13 +69,15 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
                     label="จำนวนเงิน"
                     rules={[{ required: true, message: 'กรุณากรอกจำนวนเงิน!' }]}>
                     <InputNumber placeholder="จํานวนเงิน" />
-                    <Form.Item
-                        name="note"
-                        label="หมายเหตุ"
-                        rules={[{ required: true, message: 'กรุณากรอกหมายเหตุ!' }]}
-                    >
-                        <Input.TextArea rows={1} />
-                    </Form.Item>
+                </Form.Item>
+
+
+                <Form.Item
+                    name="note"
+                    label="หมายเหตุ"
+                    rules={[{ required: true, message: 'กรุณากรอกหมายเหตุ!' }]}
+                >
+                    <Input.TextArea rows={1} />
                 </Form.Item>
             </Form>
         </Modal>

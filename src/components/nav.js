@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined, TableOutlined, HomeOutlined } from '@ant-design/icons';
+import { SettingOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import Home from './Home'
-import FinanceScreen from '../screen/FinanceScreen';
-
-// const navigation = [
-//     { label: "Home", key: 1, target: "/Home" },
-//     { label: "Finance", key: 2, target: "/Finance" },
-//     { label: "Login", key: 3, target: "/" },
-// ];
 
 
 const items = [
+    {
+        key: 'Profile',
+        label: <Link to='/Profile'>Profile</Link>,
+        icon: <UserOutlined />
+    },
+
     {
         key: 'Home',
         label: <Link to='/Home'>Home</Link>,
@@ -22,14 +20,15 @@ const items = [
     {
         key: 'การตั้งค่า',
         key: 'SubMenu',
+        label: 'Settings',
         icon: < SettingOutlined />,
         children: [
             {
                 key: 'EditOrDelete',
-                label: <Link to='/Home/Finance'>Edit</Link>,
+                label: <Link to='/Home/Finance'>Edit or Delete</Link>,
             },
             {
-                key: 'Login',
+                key: 'Add',
                 label: <Link to='/'>Logout</Link>
 
             }
@@ -37,7 +36,7 @@ const items = [
     },
 
 ];
-const App = () => {
+const Nav = () => {
     const [current, setCurrent] = useState('mail');
     // const navigate = useNavigate();
 
@@ -53,4 +52,4 @@ const App = () => {
     };
     return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
 };
-export default App;
+export default Nav;

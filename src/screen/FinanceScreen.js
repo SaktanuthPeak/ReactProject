@@ -5,7 +5,7 @@ import TransactionList from '../components/TransactionList';
 import Modal from '../components/Edit';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import App from '../components/nav'
+import Nav from '../components/nav'
 import { useNavigate } from 'react-router-dom';
 
 const URL_TXACTIONS = '/api/txactions';
@@ -81,6 +81,8 @@ function FinanceScreen() {
                 ...transactionData,
                 { id: id, key: id, ...attributes },
             ]);
+
+
         } catch (err) {
             console.log(err);
         } finally {
@@ -121,7 +123,7 @@ function FinanceScreen() {
     return (
         <div className="App">
             <header>
-                <App />
+                <Nav />
             </header>
             <body className='App-finance-body'>
 
