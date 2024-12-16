@@ -6,6 +6,7 @@ import Home from './screen/Home';
 import FinanceScreen from './screen/FinanceScreen'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Button } from 'antd'
+import ProfilePage from './screen/Profile';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337"
 
@@ -57,16 +58,18 @@ function App() {
                             )
                         }
                     />
+
                     <Route
-                        path="/Home"
+                        path="/Home/Profile"
                         element={
                             isAuthenticated ? (
-                                <LoginScreen />
+                                <ProfilePage />
                             ) : (
                                 <Navigate to="/" />
                             )
                         }
                     />
+
 
                 </Routes>
             </Router>

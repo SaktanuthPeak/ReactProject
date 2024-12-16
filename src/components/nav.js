@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const items = [
     {
         key: 'Profile',
-        label: <Link to='/Profile'>Profile</Link>,
+        label: <Link to='/Home/Profile'>Profile</Link>,
         icon: <UserOutlined />
     },
 
@@ -29,7 +29,7 @@ const items = [
             },
             {
                 key: 'Add',
-                label: <Link to='/'>Logout</Link>
+                label: <Link to='/'>Add</Link>
 
             }
         ],
