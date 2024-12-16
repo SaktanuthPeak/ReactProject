@@ -43,7 +43,6 @@ function App() {
                         )
                     }
                 />
-
                 <Route
                     path="/Home/Finance"
                     element={
@@ -54,7 +53,7 @@ function App() {
                         )
                     }
                 />
-                <></>
+
             </Routes>
         </Router>
 

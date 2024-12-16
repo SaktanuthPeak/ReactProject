@@ -72,6 +72,7 @@ function FinanceScreen() {
     const handleRowEdited = async (item) => {
         try {
             setIsLoading(true);
+            // const params = { ...item, action_datetime: dayjs() };
             const response = await axios.put(`${URL_TXACTIONS}/${item.id}`, { data: item });
             fetchItems();
             const { id, attributes } = response.data.data;

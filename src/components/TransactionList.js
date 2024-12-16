@@ -1,6 +1,6 @@
 import React from 'react';
-import { Table, Button, Tag } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { Table, Button, Tag, Space } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import dayjs from "dayjs";
 
 export default function TransactionList(props) {
@@ -36,7 +36,7 @@ export default function TransactionList(props) {
             title: 'Action',
             key: 'amount',
             render: (transaction) => (
-                <>
+                <Space>
 
                     <Button color="default" variant="outlined"
                         onClick={() => props.onRowEdited(transaction)}
@@ -53,7 +53,7 @@ export default function TransactionList(props) {
                         Delete
                     </Button>
 
-                </>
+                </Space>
             )
         },
     ];

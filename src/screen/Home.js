@@ -62,7 +62,6 @@ function HomeScreen() {
                     {/* Add your components that handle editing */}
                     <Home
                         data={transactionData} />
-                    <Button onClick={handleEditClick}>Go to Edit</Button>
                 </Spin>
             </body>
         </div>
