@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SettingOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { MenuOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -18,18 +18,18 @@ const items = [
     },
 
     {
-        key: 'การตั้งค่า',
+        key: 'เมนู',
         key: 'SubMenu',
-        label: 'Settings',
-        icon: < SettingOutlined />,
+        label: 'Menu',
+        icon: <MenuOutlined />,
         children: [
             {
                 key: 'EditOrDelete',
-                label: <Link to='/Home/Finance'>Edit or Delete</Link>,
+                label: <Link to='/Home/EditOrDelete'>Edit or Delete</Link>,
             },
             {
                 key: 'Add',
-                label: <Link to='/'>Add</Link>
+                label: <Link to='/Home/Add'>Add</Link>
 
             }
         ],

@@ -3,8 +3,7 @@ import { Spin, Typography, Divider, Button } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Nav from '../components/nav';
-import Home from '../components/Home';
-import App from '../App';
+import Home from '../table/HomeTable';
 const URL_TXACTIONS = '/api/txactions';
 
 

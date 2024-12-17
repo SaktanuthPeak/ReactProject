@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Spin, Typography, Divider, Button } from 'antd';
 import AddItem from '../components/Additem';
-import TransactionList from '../components/TransactionList';
+import TransactionList from '../table/EditOrDeleteTable';
 import Modal from '../components/Edit';
 import axios from 'axios';
 import dayjs from 'dayjs';
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const URL_TXACTIONS = '/api/txactions';
 
-function FinanceScreen() {
+function EditOrDeletePage() {
     const [summaryAmount, setSummaryAmount] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [transactionData, setTransactionData] = useState([]);
@@ -52,22 +52,6 @@ function FinanceScreen() {
             })
         )
     }
-    const handleAddItem = async (item) => {
-        try {
-            setIsLoading(true);
-            const params = { ...item, action_datetime: dayjs() };
-            const response = await axios.post(URL_TXACTIONS, { data: params });
-            const { id, attributes } = response.data.data;
-            setTransactionData([
-                ...transactionData,
-                { id: id, key: id, ...attributes },
-            ]);
-        } catch (err) {
-            console.log(err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     const handleRowEdited = async (item) => {
         try {
@@ -131,7 +115,6 @@ function FinanceScreen() {
                 <Spin spinning={isLoading}>
                     <Typography.Title>จำนวนเงินปัจจุบัน {summaryAmount} บาท</Typography.Title>
 
-                    <AddItem onItemAdded={handleAddItem} />
                     <Divider>บันทึก รายรับ - รายจ่าย</Divider>
                     <TransactionList
                         data={transactionData}
@@ -153,4 +136,4 @@ function FinanceScreen() {
     );
 }
 
-export default FinanceScreen;
+export default EditOrDeletePage;

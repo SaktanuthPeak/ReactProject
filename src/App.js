@@ -3,7 +3,8 @@ import axios from 'axios'
 import { useState } from 'react';
 import LoginScreen from './screen/LoginScreen';
 import Home from './screen/Home';
-import FinanceScreen from './screen/FinanceScreen'
+import EditOrDeletePage from './screen/EditOrDeletePage';
+import AddPage from './screen/AddPage';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Button } from 'antd'
 import ProfilePage from './screen/Profile';
@@ -48,11 +49,13 @@ function App() {
                             )
                         }
                     />
+
+
                     <Route
-                        path="/Home/Finance"
+                        path="/Home/Profile"
                         element={
                             isAuthenticated ? (
-                                <FinanceScreen />
+                                <ProfilePage />
                             ) : (
                                 <Navigate to="/" />
                             )
@@ -60,10 +63,21 @@ function App() {
                     />
 
                     <Route
-                        path="/Home/Profile"
+                        path="/Home/Add"
                         element={
                             isAuthenticated ? (
-                                <ProfilePage />
+                                <AddPage />
+                            ) : (
+                                <Navigate to="/" />
+                            )
+                        }
+                    />
+
+                    <Route
+                        path="/Home/EditOrDelete"
+                        element={
+                            isAuthenticated ? (
+                                <EditOrDeletePage />
                             ) : (
                                 <Navigate to="/" />
                             )
