@@ -5,7 +5,7 @@ import LoginScreen from './screen/LoginScreen';
 import Home from './screen/Home';
 import EditOrDeletePage from './screen/EditOrDeletePage';
 import AddPage from './screen/AddPage';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import { Button } from 'antd'
 import ProfilePage from './screen/Profile';
 
@@ -26,68 +26,68 @@ function App() {
         //     </header>
 
         // </div>
-        <div>
-            <Router>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            isAuthenticated ? (
-                                <Navigate to="/Home" />
-                            ) : (
-                                <LoginScreen onLoginSuccess={handleLoginSuccess} />
-                            )
-                        }
-                    />
-                    <Route
-                        path="/Home"
-                        element={
-                            isAuthenticated ? (
-                                <Home />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path="/"
+                    element={
+                        isAuthenticated ? (
+                            <Navigate to="/Home" />
+                        ) : (
+                            <LoginScreen onLoginSuccess={handleLoginSuccess} />
+                        )
+                    }
+                />
+                <Route
+                    path="/Home"
+                    element={
+                        isAuthenticated ? (
+                            <Home />
+                        ) : (
+                            <Navigate to="/" />
+                        )
+                    }
+                />
 
 
-                    <Route
-                        path="/Home/Profile"
-                        element={
-                            isAuthenticated ? (
-                                <ProfilePage />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
+                <Route
+                    path="/Home/Profile"
+                    element={
+                        isAuthenticated ? (
+                            <ProfilePage />
+                        ) : (
+                            <Navigate to="/" />
+                        )
+                    }
+                />
 
-                    <Route
-                        path="/Home/Add"
-                        element={
-                            isAuthenticated ? (
-                                <AddPage />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
+                <Route
+                    path="/Home/Add"
+                    element={
+                        isAuthenticated ? (
+                            <AddPage />
+                        ) : (
+                            <Navigate to="/" />
+                        )
+                    }
+                />
 
-                    <Route
-                        path="/Home/EditOrDelete"
-                        element={
-                            isAuthenticated ? (
-                                <EditOrDeletePage />
-                            ) : (
-                                <Navigate to="/" />
-                            )
-                        }
-                    />
+                <Route
+                    path="/Home/EditOrDelete"
+                    element={
+                        isAuthenticated ? (
+                            <EditOrDeletePage />
+                        ) : (
+                            <Navigate to="/" />
+                        )
+                    }
+                />
 
 
-                </Routes>
-            </Router>
-        </div>
+            </Routes>
+
+        </BrowserRouter>
+
 
 
 
