@@ -45,7 +45,7 @@ const items = [
 
 
 const Nav = ({ handleLogout }) => {
-    const [current, setCurrent] = useState('mail');
+    const [current, setCurrent] = useState('Home');
 
     // const navigate = useNavigate();
 

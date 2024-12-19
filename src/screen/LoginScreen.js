@@ -19,7 +19,7 @@ export default function LoginScreen(props) {
             setRememberMe(true);
 
         }
-    })
+    }, [])
     const handleLogin = async (formData) => {
         try {
             setIsLoading(true)
@@ -59,14 +59,14 @@ export default function LoginScreen(props) {
                     <Form.Item
                         label="Username"
                         name="identifier"
-                        onChange={(e) => setUsername(e.target.values)}
+                        onChange={(e) => setUsername(e.target.value)}
                         rules={[{ required: true, }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="Password"
                         name="password"
-                        onChange={(e) => setPassword(e.target.values)}
+                        onChange={(e) => setPassword(e.target.value)}
                         rules={[{ required: true },]}>
                         <Input.Password />
                     </Form.Item>
