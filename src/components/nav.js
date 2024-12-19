@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MenuOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { MenuOutlined, HomeOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -31,13 +31,22 @@ const items = [
                 key: 'Add',
                 label: <Link to='/Home/Add'>Add</Link>
 
+            },
+            {
+                key: 'Logout',
+                label: 'Logout',
+                icon: <LogoutOutlined />,
+
             }
         ],
     },
 
 ];
-const Nav = () => {
+
+
+const Nav = ({ handleLogout }) => {
     const [current, setCurrent] = useState('mail');
+
     // const navigate = useNavigate();
 
     // const handleMenuClick = ({ key }) => {
@@ -48,7 +57,14 @@ const Nav = () => {
     // };
     const onClick = (e) => {
         console.log('click ', e);
-        setCurrent(e.key);
+        if (e.key === 'Logout') {
+            handleLogout();
+
+        } else {
+
+        } setCurrent(e.key);
+
+
     };
     return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
 };

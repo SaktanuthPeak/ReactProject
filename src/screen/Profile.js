@@ -32,9 +32,7 @@ const ProfilePage = () => {
     </div>;
     return (
         <div>
-            <header>
-                <Nav />
-            </header>
+
             <div className='profile-page-container'>
                 <div className="profile-page">
                     <Card
@@ -69,9 +67,7 @@ const ProfilePage = () => {
                         </Space>
 
                     </Card>
-                    <Button type="primary" danger >
-                        Logout
-                    </Button>
+
 
                 </div>
             </div>

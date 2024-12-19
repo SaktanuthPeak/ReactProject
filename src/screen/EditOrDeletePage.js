@@ -106,9 +106,7 @@ function EditOrDeletePage() {
 
     return (
         <div className="App">
-            <header>
-                <Nav />
-            </header>
+
             <body >
 
 

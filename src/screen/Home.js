@@ -54,9 +54,7 @@ function HomeScreen() {
 
     return (
         <div className="App">
-            <header>
-                <Nav />
-            </header>
+
             <body className>
                 <Spin spinning={isLoading}>
                     <Typography.Title>จำนวนเงินปัจจุบัน {summaryAmount} บาท</Typography.Title>

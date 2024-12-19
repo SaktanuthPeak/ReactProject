@@ -8,6 +8,8 @@ import AddPage from './screen/AddPage';
 import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import { Button } from 'antd'
 import ProfilePage from './screen/Profile';
+import Nav from './components/nav';
+
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337"
 
@@ -20,7 +22,9 @@ function App() {
     }
     const handleLogout = () => {
         setIsAuthenticated(false)
+        console.log('User has logged out');
     }
+
 
     return (
         // <div className="App">
@@ -31,6 +35,9 @@ function App() {
 
         // </div>
         <BrowserRouter>
+            <div>{isAuthenticated ? (<Nav handleLogout={handleLogout} />) : (<Navigate to="/login" />)}
+
+            </div>
             <Routes>
                 <Route
                     path="/login"

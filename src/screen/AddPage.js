@@ -74,9 +74,7 @@ function AddPage() {
 
     return (
         <div className="App">
-            <header>
-                <Nav />
-            </header>
+
             <body className='table-container'>
                 <Spin spinning={isLoading}>
 
