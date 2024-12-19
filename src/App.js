@@ -16,6 +16,10 @@ function App() {
     const handleLoginSuccess = () => {
         setIsAuthenticated(true);
 
+
+    }
+    const handleLogout = () => {
+        setIsAuthenticated(false)
     }
 
     return (
@@ -29,7 +33,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route
-                    path="/"
+                    path="/login"
                     element={
                         isAuthenticated ? (
                             <Navigate to="/Home" />
@@ -44,7 +48,7 @@ function App() {
                         isAuthenticated ? (
                             <Home />
                         ) : (
-                            <Navigate to="/" />
+                            <Navigate to="/login" />
                         )
                     }
                 />
@@ -56,7 +60,7 @@ function App() {
                         isAuthenticated ? (
                             <ProfilePage />
                         ) : (
-                            <Navigate to="/" />
+                            <Navigate to="/login" />
                         )
                     }
                 />
@@ -67,7 +71,7 @@ function App() {
                         isAuthenticated ? (
                             <AddPage />
                         ) : (
-                            <Navigate to="/" />
+                            <Navigate to="/login" />
                         )
                     }
                 />
@@ -78,7 +82,7 @@ function App() {
                         isAuthenticated ? (
                             <EditOrDeletePage />
                         ) : (
-                            <Navigate to="/" />
+                            <Navigate to="/login" />
                         )
                     }
                 />

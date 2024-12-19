@@ -2,16 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ProfilePage.css';
 import Nav from '../components/nav';
-import { Formik, Field } from 'formik';
 import { Avatar, Button, Card, Space, Form } from "antd";
 import { UserOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
-    const [user, setUser] = useState(null); useEffect(() => {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+    useEffect(() => {
         axios.get('/api/users/me')
             .then(response => setUser(response.data))
             .catch(error => console.error('Error fetching user data:', error));
+
+
     }, []);
+
     if (!user)
         return
     <div>
@@ -43,43 +50,19 @@ const ProfilePage = () => {
                             </h1>
                             <div className="profile-info">
 
-                                <p>{user.email}</p>
-                                <p>{user.username}</p>
-                                <Formik
-                                    initialValues={{ name: user.name, email: user.email }}
-                                    onSubmit={(values, { setSubmitting }) => {
-                                        axios.post('api/users/update', values)
-                                            .then(response => {
-                                                setUser(response.data);
-                                                setSubmitting(false);
-                                            })
-                                            .catch(error => {
-                                                console.error('Error updating user data:', error);
-                                                setSubmitting(false);
-                                            });
-                                    }}
-                                >
-                                    {({ isSubmitting }) => (
-                                        <Form>
-                                            <div>
-                                                <label htmlFor="name">Name</label>
-                                                <Field id="name" name="name" placeholder="John Doe" />
-                                            </div>
-                                            <div>
-                                                <label htmlFor="email">Email</label>
-                                                <Field id="email" name="email" placeholder="john.doe@example.com" type="email" />
-                                            </div>
-                                            <button type="submit" disabled={isSubmitting}>
-                                                Update
-                                            </button>
-                                        </Form>
-                                    )}
-                                </Formik>
+                                <p>email : {user.email}</p>
+                                <p>username : {user.username}</p>
+                                <p>name : {user.firstname} {user.lastname}</p>
+
+
                             </div>
                             <Button type="default">edit profile</Button>
                         </Space>
 
                     </Card>
+                    <Button type="primary" danger onClick={handleLogout}>
+                        Logout
+                    </Button>
 
                 </div>
             </div>
