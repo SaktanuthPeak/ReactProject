@@ -4,20 +4,26 @@ import './ProfilePage.css';
 import Nav from '../components/nav';
 import { Avatar, Button, Card, Space, Form } from "antd";
 import { UserOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
-
+import EditProfile from '../components/EditProfile';
 const ProfilePage = () => {
-    const [user, setUser] = useState(null);
-    const navigate = useNavigate();
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
 
+    const [user, setUser] = useState(null);
+    const [isModalVisible, setModalVisible] = useState(false);
     useEffect(() => {
         axios.get('/api/users/me')
             .then(response => setUser(response.data))
             .catch(error => console.error('Error fetching user data:', error));
 
 
+
     }, []);
+    const handleEditSubmit = (updatedData) => {
+        axios.put('/api/users/me', updatedData)
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(error => console.error('Error updating user data:', error));
+    };
 
     if (!user)
         return
@@ -56,16 +62,27 @@ const ProfilePage = () => {
 
 
                             </div>
-                            <Button type="default">edit profile</Button>
+                            <Button type="default"
+                                onClick={() => setModalVisible(true)}>
+                                Edit Profile
+                            </Button>
                         </Space>
 
                     </Card>
-                    <Button type="primary" danger onClick={handleLogout}>
+                    <Button type="primary" danger >
                         Logout
                     </Button>
 
                 </div>
             </div>
+            {isModalVisible && (
+                <EditProfile
+                    defaultValue={user}
+
+                    closeModal={() => setModalVisible(false)}
+                    onSubmit={handleEditSubmit}
+                />
+            )}
         </div >
 
 
