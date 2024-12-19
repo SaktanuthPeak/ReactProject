@@ -57,13 +57,13 @@ function HomeScreen() {
             <header>
                 <Nav />
             </header>
-            <body className='App-finance-body'>
+            <body className>
                 <Spin spinning={isLoading}>
                     <Typography.Title>จำนวนเงินปัจจุบัน {summaryAmount} บาท</Typography.Title>
                     <Divider>บันทึก รายรับ - รายจ่าย</Divider>
-                    {/* Add your components that handle editing */}
-                    <Home
-                        data={transactionData} />
+                    <div className="table-container">
+                        <Home data={transactionData} />
+                    </div>
                 </Spin>
             </body>
         </div>

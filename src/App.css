@@ -65,3 +65,30 @@
   padding: 20px;
   background-color: #e4e4e4;
 } */
+
+
+
+.table-container {
+  width: 80%; 
+  margin: 0 auto; 
+}
+
+.table-header {
+  text-align: left; 
+  font-weight: bold;
+}
+
+.ant-table {
+  background-color: #ffffff; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.ant-table-thead > tr > th {
+  background-color: #f5f5f5; 
+  font-weight: 600;
+}
+
+.ant-table-cell {
+  padding: 12px; 
+}

@@ -109,26 +109,29 @@ function EditOrDeletePage() {
             <header>
                 <Nav />
             </header>
-            <body className='App-finance-body'>
+            <body >
 
 
                 <Spin spinning={isLoading}>
                     <Typography.Title>จำนวนเงินปัจจุบัน {summaryAmount} บาท</Typography.Title>
 
                     <Divider>บันทึก รายรับ - รายจ่าย</Divider>
-                    <TransactionList
-                        data={transactionData}
-                        onRowEdited={openModal}
-                        onNoteChanged={handleNoteChanged}
-                        onRowDeleted={handleRowDeleted}
-                    />
-                    {isModalVisible && (
-                        <Modal
-                            defaultValue={editingRecord}
-                            closeModal={closeModal}
-                            onSubmit={handleRowEdited}
+                    <div className="table-container">
+                        <TransactionList
+                            data={transactionData}
+                            onRowEdited={openModal}
+                            onNoteChanged={handleNoteChanged}
+                            onRowDeleted={handleRowDeleted}
                         />
-                    )}
+                        {isModalVisible && (
+                            <Modal
+                                defaultValue={editingRecord}
+                                closeModal={closeModal}
+                                onSubmit={handleRowEdited}
+                            />
+                        )}
+                    </div>
+
                     <Button onClick={handleEditClick}>Go to Home</Button>
                 </Spin>
             </body>

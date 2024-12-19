@@ -77,7 +77,7 @@ function AddPage() {
             <header>
                 <Nav />
             </header>
-            <body className='App-finance-body'>
+            <body className='table-container'>
                 <Spin spinning={isLoading}>
 
                     <AddItem onItemAdded={handleAddItem} />
