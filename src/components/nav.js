@@ -33,6 +33,10 @@ const items = [
 
             },
             {
+                key: 'กราฟสรุปผล',
+                label: <Link to='/Home/Chart'>Chart</Link>
+            },
+            {
                 key: 'Logout',
                 label: 'Logout',
                 icon: <LogoutOutlined />,

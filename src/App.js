@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter } from 
 import { Button } from 'antd'
 import ProfilePage from './screen/Profile';
 import Nav from './components/nav';
-
+import FinanceChart from './screen/financeChart';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || "http://localhost:1337"
 
@@ -88,6 +88,16 @@ function App() {
                     element={
                         isAuthenticated ? (
                             <EditOrDeletePage />
+                        ) : (
+                            <Navigate to="/login" />
+                        )
+                    }
+                />
+                <Route
+                    path="/Home/Chart"
+                    element={
+                        isAuthenticated ? (
+                            <FinanceChart />
                         ) : (
                             <Navigate to="/login" />
                         )
