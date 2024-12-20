@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MenuOutlined, HomeOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { MenuOutlined, HomeOutlined, UserOutlined, LogoutOutlined, BarChartOutlined, EditOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -25,16 +25,19 @@ const items = [
         children: [
             {
                 key: 'EditOrDelete',
-                label: <Link to='/Home/EditOrDelete'>Edit or Delete</Link>,
+                label: <Link to='/Home/EditOrDelete'>เเก้ไขรายการ</Link>,
+                icon: <EditOutlined />
             },
             {
                 key: 'Add',
-                label: <Link to='/Home/Add'>Add</Link>
+                label: <Link to='/Home/Add'>เพิ่มรายการ</Link>,
+                icon: <AppstoreAddOutlined />
 
             },
             {
                 key: 'กราฟสรุปผล',
-                label: <Link to='/Home/Chart'>Chart</Link>
+                label: <Link to='/Home/Chart'>กราฟสรุปรายรับ รายจ่าย</Link>,
+                icon: <BarChartOutlined />
             },
             {
                 key: 'Logout',

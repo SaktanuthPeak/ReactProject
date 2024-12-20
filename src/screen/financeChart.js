@@ -3,15 +3,16 @@ import Chart from 'chart.js/auto';
 import axios from 'axios';
 
 const FinanceChart = () => {
-    const [transactions, setTransactions] = useState([]);
+    const [transactionData, setTransactionData] = useState([]);
     const [chartInstance, setChartInstance] = useState(null);
+    const [summaryAmount, setSummaryAmount] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/txactions');
                 console.log(response.data);
-                setTransactions(response.data.data);
+                setTransactionData(response.data.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -20,8 +21,8 @@ const FinanceChart = () => {
     }, []);
 
     useEffect(() => {
-        if (transactions.length > 0) {
-            const dailyTotal = transactions.reduce((acc, { attributes }) => {
+        if (transactionData.length > 0) {
+            const dailyTotal = transactionData.reduce((acc, { attributes }) => {
                 const date = new Date(attributes.action_datetime).toLocaleDateString();
                 if (!acc[date]) {
                     acc[date] = { income: 0, expense: 0 };
@@ -80,12 +81,13 @@ const FinanceChart = () => {
 
             setChartInstance(newChartInstance);
         }
-    }, [transactions]);
+    }, [transactionData]);
+
 
     return (
         <div className='App'>
             <header>
-                <h1>สรุปเงินในเเต่ละวัน</h1>
+                <h1>ตารางสรุปรายรับ รายจ่ายในเเต่ละวัน</h1>
             </header>
 
             <body>
