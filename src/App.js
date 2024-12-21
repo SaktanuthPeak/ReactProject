@@ -6,7 +6,6 @@ import Home from './screen/Home';
 import EditOrDeletePage from './screen/EditOrDeletePage';
 import AddPage from './screen/AddPage';
 import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
-import { Button } from 'antd'
 import ProfilePage from './screen/Profile';
 import Nav from './components/nav';
 import FinanceChart from './screen/financeChart';

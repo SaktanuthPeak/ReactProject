@@ -9,6 +9,7 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
         if (defaultValue) {
             form.setFieldsValue({
                 id: defaultValue.id,
+                type: defaultValue.type,
                 note: defaultValue.note,
                 amount: defaultValue.amount
 
@@ -22,7 +23,7 @@ const Edit = ({ defaultValue, closeModal, onSubmit }) => {
                 ...defaultValue,
                 ...values,
             };
-            console.log("Updated Record:", updatedRecord);
+            // console.log("Updated Record:", updatedRecord);
             onSubmit(updatedRecord);
             closeModal();
         });

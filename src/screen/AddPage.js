@@ -3,7 +3,6 @@ import { Spin, Divider } from 'antd';
 import AddItem from '../components/Additem';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import Nav from '../components/nav'
 import { useNavigate } from 'react-router-dom';
 import AddTable from '../table/AddTable';
 

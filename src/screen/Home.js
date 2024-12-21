@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Spin, Typography, Divider, Button } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Nav from '../components/nav';
 import Home from '../table/HomeTable';
 const URL_TXACTIONS = '/api/txactions';
 
@@ -11,11 +10,7 @@ function HomeScreen() {
     const [summaryAmount, setSummaryAmount] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [transactionData, setTransactionData] = useState([]);
-    const navigate = useNavigate();
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const handleLogout = () => {
-        setIsAuthenticated(false)
-    }
+
 
 
 

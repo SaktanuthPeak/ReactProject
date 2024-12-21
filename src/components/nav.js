@@ -63,7 +63,7 @@ const Nav = ({ handleLogout }) => {
     //     }
     // };
     const onClick = (e) => {
-        console.log('click ', e);
+        // console.log('click ', e);
         if (e.key === 'Logout') {
             handleLogout();
 
